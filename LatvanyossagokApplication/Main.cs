@@ -22,6 +22,10 @@ namespace LatvanyossagokApplication
             InitializeComponent();
             BTN_ÚjVárosLétrehozása.Visible = false;
             BTN_VarosHozzaadas.Enabled = false;
+            BTN_UjLatvanyossagLetrehozasa.Visible = false;
+            BTN_LatvanyossagHozzaadas.Enabled = false;
+            BTN_VarosTorles.Enabled = false;
+            BTN_LatvanyossagTorles.Enabled = false;
 
             conn = new MySqlConnection("Server=localhost; Database=latvanyossagokdb; Uid=root; Pwd=;");
             try
@@ -104,9 +108,9 @@ namespace LatvanyossagokApplication
                     VarosListaFrissites();
                     VarosHozzaadasFormTorles();
                 }
-                catch (Exception ex)
+                catch
                 {
-                    MessageBox.Show(ex.ToString());
+                    MessageBox.Show("Hiba volt a módosítással!");
                 }
             }
         }
@@ -127,26 +131,48 @@ namespace LatvanyossagokApplication
 
         private void BTN_VarosTorles_Click(object sender, EventArgs e)
         {
-            reader = SQLparancs("DELETE FROM varosok WHERE ID LIKE '" + ((Varos)LB_Varosok.SelectedItem).Id + "'");
+            LB_Latvanyossagok.Items.Clear();
+            reader = SQLparancs("DELETE FROM latvanyossagok WHERE varos_id LIKE '" + ((Varos)LB_Varosok.SelectedItem).Id + "'");
+            reader.Close();
+            reader = SQLparancs("DELETE FROM varosok WHERE id LIKE '" + ((Varos)LB_Varosok.SelectedItem).Id + "'");
             reader.Close();
             VarosListaFrissites();
         }
 
         private void BTN_LatvanyossagHozzaadas_Click(object sender, EventArgs e)
         {
-            if (TXTBOX_LatvanyossagNev.Text != "" && LB_Varosok.SelectedIndex != -1)
+            if(LB_Varosok.SelectedIndex != -1)
             {
-                try
+                if (BTN_LatvanyossagHozzaadas.Text == "✔")
                 {
-                    reader = SQLparancs("INSERT INTO latvanyossagok (varos_id, nev, leiras, ar) VALUES(" + ((Varos)LB_Varosok.SelectedItem).Id + ", '" +TXTBOX_LatvanyossagNev.Text + "', '" + TXTBOX_LatvanyossagLeiras.Text + "', " + NUPDOWN_LatvanyossagAr.Value + ")");
-                    reader.Close();
-                    LatvanyossagListaFrissites();
+                    try
+                    {
+                        reader = SQLparancs("INSERT INTO latvanyossagok (varos_id, nev, leiras, ar) VALUES(" + ((Varos)LB_Varosok.SelectedItem).Id + ", '" + TXTBOX_LatvanyossagNev.Text + "', '" + TXTBOX_LatvanyossagLeiras.Text + "', " + NUPDOWN_LatvanyossagAr.Value + ")");
+                        reader.Close();
+                        LatvanyossagListaFrissites();
+                        LatvanyossagHozzaadasFormTorles();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Hiba volt a felvétellel!");
+                    }
                 }
-                catch
+                else
                 {
-                    MessageBox.Show("Hiba volt a felvétellel!");
+                    try
+                    {
+                        reader = SQLparancs("UPDATE latvanyossagok SET nev='" + TXTBOX_LatvanyossagNev.Text + "', leiras='" + TXTBOX_LatvanyossagLeiras.Text + "', ar=" + NUPDOWN_LatvanyossagAr.Value + " WHERE ID LIKE '" + ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Id + "'");
+                        reader.Close();
+                        LatvanyossagListaFrissites();
+                        LatvanyossagHozzaadasFormTorles();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Hiba volt a módosítással!" + ex);
+                    }
                 }
-            } else
+            }
+            else
             {
                 MessageBox.Show("Válasszon ki egy várost!");
             }
@@ -154,23 +180,26 @@ namespace LatvanyossagokApplication
 
         private void LatvanyossagListaFrissites()
         {
-            LB_Latvanyossagok.Items.Clear();
-            reader = SQLparancs("SELECT * FROM latvanyossagok WHERE varos_id LIKE '" + ((Varos)LB_Varosok.SelectedItem).Id + "'");
-            using (reader)
+            if(LB_Varosok.SelectedIndex != -1)
             {
-                while (reader.Read())
+                LB_Latvanyossagok.Items.Clear();
+                reader = SQLparancs("SELECT * FROM latvanyossagok WHERE varos_id LIKE '" + ((Varos)LB_Varosok.SelectedItem).Id + "'");
+                using (reader)
                 {
-                    LB_Latvanyossagok.Items.Add(new Latvanyossag(int.Parse(reader.GetString("id")), int.Parse(reader.GetString("varos_id")), reader.GetString("nev"), reader.GetString("leiras"), int.Parse(reader.GetString("ar"))));
+                    while (reader.Read())
+                    {
+                        LB_Latvanyossagok.Items.Add(new Latvanyossag(int.Parse(reader.GetString("id")), int.Parse(reader.GetString("varos_id")), reader.GetString("nev"), reader.GetString("leiras"), int.Parse(reader.GetString("ar"))));
+                    }
                 }
+                reader.Close();
             }
-            reader.Close();
         }
 
         private void BTN_LatvanyossagTorles_Click(object sender, EventArgs e)
         {
             if(LB_Latvanyossagok.SelectedIndex != -1)
             {
-                reader = SQLparancs("DELETE FROM latvanyossagok WHERE ID LIKE '" + ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Id + "'");
+                reader = SQLparancs("DELETE FROM latvanyossagok WHERE id LIKE '" + ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Id + "'");
                 reader.Close();
                 LatvanyossagListaFrissites();
             }
@@ -185,9 +214,12 @@ namespace LatvanyossagokApplication
                 BTN_VarosHozzaadas.Text = "✏";
                 BTN_VarosHozzaadas.Enabled = false;
                 BTN_ÚjVárosLétrehozása.Visible = true;
+                BTN_VarosTorles.Enabled = true;
+                BTN_LatvanyossagTorles.Enabled = false;
             } else
             {
                 BTN_ÚjVárosLétrehozása.Visible = false;
+                BTN_VarosTorles.Enabled = false;
             }
 
             LatvanyossagListaFrissites();
@@ -201,6 +233,13 @@ namespace LatvanyossagokApplication
                 TXTBOX_LatvanyossagLeiras.Text = ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Leiras;
                 NUPDOWN_LatvanyossagAr.Value = ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Ar;
                 BTN_LatvanyossagHozzaadas.Text = "✏";
+                BTN_LatvanyossagHozzaadas.Enabled = false;
+                BTN_UjLatvanyossagLetrehozasa.Visible = true;
+                BTN_LatvanyossagTorles.Enabled = true;
+            } else
+            {
+                BTN_LatvanyossagTorles.Enabled = false;
+                BTN_UjLatvanyossagLetrehozasa.Visible = false;
             }
         }
 
@@ -270,6 +309,103 @@ namespace LatvanyossagokApplication
             {
                 BTN_VarosHozzaadas.Enabled = false;
             }
+        }
+
+        private void TXTBOX_LatvanyossagNev_TextChanged(object sender, EventArgs e)
+        {
+            if (TXTBOX_LatvanyossagNev.Text != "")
+            {
+                if (BTN_LatvanyossagHozzaadas.Text == "✔")
+                {
+                    BTN_LatvanyossagHozzaadas.Enabled = true;
+                }
+                else
+                {
+                    if (TXTBOX_LatvanyossagNev.Text != ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Nev || TXTBOX_LatvanyossagLeiras.Text != ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Leiras || NUPDOWN_LatvanyossagAr.Value != ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Ar)
+                    {
+                        BTN_LatvanyossagHozzaadas.Enabled = true;
+                    }
+                    else
+                    {
+                        BTN_LatvanyossagHozzaadas.Enabled = false;
+                    }
+                }
+            }
+            else
+            {
+                BTN_LatvanyossagHozzaadas.Enabled = false;
+            }
+        }
+
+        private void TXTBOX_LatvanyossagLeiras_TextChanged(object sender, EventArgs e)
+        {
+            if (TXTBOX_LatvanyossagNev.Text != "")
+            {
+                if (BTN_LatvanyossagHozzaadas.Text == "✔")
+                {
+                    BTN_LatvanyossagHozzaadas.Enabled = true;
+                }
+                else
+                {
+                    if (TXTBOX_LatvanyossagNev.Text != ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Nev || TXTBOX_LatvanyossagLeiras.Text != ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Leiras || NUPDOWN_LatvanyossagAr.Value != ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Ar)
+                    {
+                        BTN_LatvanyossagHozzaadas.Enabled = true;
+                    }
+                    else
+                    {
+                        BTN_LatvanyossagHozzaadas.Enabled = false;
+                    }
+                }
+            }
+            else
+            {
+                BTN_LatvanyossagHozzaadas.Enabled = false;
+            }
+        }
+
+        private void NUPDOWN_LatvanyossagAr_ValueChanged(object sender, EventArgs e)
+        {
+            if (TXTBOX_LatvanyossagNev.Text != "")
+            {
+                if (BTN_LatvanyossagHozzaadas.Text == "✔")
+                {
+                    BTN_LatvanyossagHozzaadas.Enabled = true;
+                }
+                else
+                {
+                    if (TXTBOX_LatvanyossagNev.Text != ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Nev || TXTBOX_LatvanyossagLeiras.Text != ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Leiras || NUPDOWN_LatvanyossagAr.Value != ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Ar)
+                    {
+                        BTN_LatvanyossagHozzaadas.Enabled = true;
+                    }
+                    else
+                    {
+                        BTN_LatvanyossagHozzaadas.Enabled = false;
+                    }
+                }
+            }
+            else
+            {
+                BTN_LatvanyossagHozzaadas.Enabled = false;
+            }
+        }
+
+        private void BTN_UjLatvanyossagLetrehozasa_Click(object sender, EventArgs e)
+        {
+            TXTBOX_LatvanyossagNev.Text = "";
+            TXTBOX_LatvanyossagLeiras.Text = "";
+            NUPDOWN_LatvanyossagAr.Value = 0;
+            BTN_LatvanyossagHozzaadas.Text = "✔";
+            BTN_ÚjVárosLétrehozása.Visible = false;
+            LB_Latvanyossagok.SelectedIndex = -1;
+        }
+
+        private void LatvanyossagHozzaadasFormTorles()
+        {
+            TXTBOX_LatvanyossagNev.Text = "";
+            TXTBOX_LatvanyossagLeiras.Text = "";
+            NUPDOWN_LatvanyossagAr.Value = 0;
+            BTN_LatvanyossagHozzaadas.Text = "✔";
+            BTN_UjLatvanyossagLetrehozasa.Visible = false;
         }
     }
 }

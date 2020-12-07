@@ -23,7 +23,13 @@ namespace LatvanyossagokApplication
 
         public override string ToString()
         {
-            return nev;
+            if(ar == 0)
+            {
+                return nev + " – " + "Ingyenes";
+            } else
+            {
+                return nev + " – " + ar + " Ft";
+            }
         }
 
         public int Id

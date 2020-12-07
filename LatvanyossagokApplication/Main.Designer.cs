@@ -38,8 +38,7 @@ namespace LatvanyossagokApplication
             this.BTN_VarosTorles = new System.Windows.Forms.Button();
             this.LB_Varosok = new System.Windows.Forms.ListBox();
             this.GB_Latvanyossag = new System.Windows.Forms.GroupBox();
-            this.GB_LatvanyossagLeiras = new System.Windows.Forms.GroupBox();
-            this.LBL_LatvanyossagLeiras = new System.Windows.Forms.Label();
+            this.BTN_UjLatvanyossagLetrehozasa = new System.Windows.Forms.Button();
             this.BTN_LatvanyossagTorles = new System.Windows.Forms.Button();
             this.LBL_LatvanyossagAr = new System.Windows.Forms.Label();
             this.BTN_LatvanyossagHozzaadas = new System.Windows.Forms.Button();
@@ -47,11 +46,9 @@ namespace LatvanyossagokApplication
             this.LB_Latvanyossagok = new System.Windows.Forms.ListBox();
             this.NUPDOWN_LatvanyossagAr = new System.Windows.Forms.NumericUpDown();
             this.TXTBOX_LatvanyossagNev = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.NUPDOWN_VarosLakossag)).BeginInit();
             this.GB_Varos.SuspendLayout();
             this.GB_Latvanyossag.SuspendLayout();
-            this.GB_LatvanyossagLeiras.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUPDOWN_LatvanyossagAr)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,6 +67,11 @@ namespace LatvanyossagokApplication
             // 
             this.NUPDOWN_VarosLakossag.Location = new System.Drawing.Point(286, 67);
             this.NUPDOWN_VarosLakossag.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.NUPDOWN_VarosLakossag.Maximum = new decimal(new int[] {
+            1215752191,
+            23,
+            0,
+            0});
             this.NUPDOWN_VarosLakossag.Name = "NUPDOWN_VarosLakossag";
             this.NUPDOWN_VarosLakossag.Size = new System.Drawing.Size(108, 26);
             this.NUPDOWN_VarosLakossag.TabIndex = 1;
@@ -142,6 +144,7 @@ namespace LatvanyossagokApplication
             // LB_Varosok
             // 
             this.LB_Varosok.FormattingEnabled = true;
+            this.LB_Varosok.HorizontalScrollbar = true;
             this.LB_Varosok.IntegralHeight = false;
             this.LB_Varosok.ItemHeight = 21;
             this.LB_Varosok.Location = new System.Drawing.Point(8, 27);
@@ -154,8 +157,7 @@ namespace LatvanyossagokApplication
             // 
             // GB_Latvanyossag
             // 
-            this.GB_Latvanyossag.Controls.Add(this.button1);
-            this.GB_Latvanyossag.Controls.Add(this.GB_LatvanyossagLeiras);
+            this.GB_Latvanyossag.Controls.Add(this.BTN_UjLatvanyossagLetrehozasa);
             this.GB_Latvanyossag.Controls.Add(this.BTN_LatvanyossagTorles);
             this.GB_Latvanyossag.Controls.Add(this.LBL_LatvanyossagAr);
             this.GB_Latvanyossag.Controls.Add(this.BTN_LatvanyossagHozzaadas);
@@ -165,30 +167,22 @@ namespace LatvanyossagokApplication
             this.GB_Latvanyossag.Controls.Add(this.TXTBOX_LatvanyossagNev);
             this.GB_Latvanyossag.Location = new System.Drawing.Point(438, 12);
             this.GB_Latvanyossag.Name = "GB_Latvanyossag";
-            this.GB_Latvanyossag.Size = new System.Drawing.Size(587, 435);
+            this.GB_Latvanyossag.Size = new System.Drawing.Size(427, 435);
             this.GB_Latvanyossag.TabIndex = 5;
             this.GB_Latvanyossag.TabStop = false;
             this.GB_Latvanyossag.Text = "Látványosság";
             // 
-            // GB_LatvanyossagLeiras
+            // BTN_UjLatvanyossagLetrehozasa
             // 
-            this.GB_LatvanyossagLeiras.Controls.Add(this.LBL_LatvanyossagLeiras);
-            this.GB_LatvanyossagLeiras.ForeColor = System.Drawing.Color.Gray;
-            this.GB_LatvanyossagLeiras.Location = new System.Drawing.Point(410, 28);
-            this.GB_LatvanyossagLeiras.Name = "GB_LatvanyossagLeiras";
-            this.GB_LatvanyossagLeiras.Size = new System.Drawing.Size(171, 395);
-            this.GB_LatvanyossagLeiras.TabIndex = 8;
-            this.GB_LatvanyossagLeiras.TabStop = false;
-            this.GB_LatvanyossagLeiras.Text = "Leírás";
-            // 
-            // LBL_LatvanyossagLeiras
-            // 
-            this.LBL_LatvanyossagLeiras.Font = new System.Drawing.Font("Montserrat", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LBL_LatvanyossagLeiras.Location = new System.Drawing.Point(7, 26);
-            this.LBL_LatvanyossagLeiras.Name = "LBL_LatvanyossagLeiras";
-            this.LBL_LatvanyossagLeiras.Size = new System.Drawing.Size(135, 79);
-            this.LBL_LatvanyossagLeiras.TabIndex = 0;
-            this.LBL_LatvanyossagLeiras.Text = "Látványosság leírása";
+            this.BTN_UjLatvanyossagLetrehozasa.Location = new System.Drawing.Point(255, 317);
+            this.BTN_UjLatvanyossagLetrehozasa.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.BTN_UjLatvanyossagLetrehozasa.Name = "BTN_UjLatvanyossagLetrehozasa";
+            this.BTN_UjLatvanyossagLetrehozasa.Size = new System.Drawing.Size(149, 37);
+            this.BTN_UjLatvanyossagLetrehozasa.TabIndex = 9;
+            this.BTN_UjLatvanyossagLetrehozasa.TabStop = false;
+            this.BTN_UjLatvanyossagLetrehozasa.Text = "Új látványosság";
+            this.BTN_UjLatvanyossagLetrehozasa.UseVisualStyleBackColor = true;
+            this.BTN_UjLatvanyossagLetrehozasa.Click += new System.EventHandler(this.BTN_UjLatvanyossagLetrehozasa_Click);
             // 
             // BTN_LatvanyossagTorles
             // 
@@ -232,10 +226,12 @@ namespace LatvanyossagokApplication
             this.TXTBOX_LatvanyossagLeiras.Size = new System.Drawing.Size(150, 98);
             this.TXTBOX_LatvanyossagLeiras.TabIndex = 5;
             this.TXTBOX_LatvanyossagLeiras.TabStop = false;
+            this.TXTBOX_LatvanyossagLeiras.TextChanged += new System.EventHandler(this.TXTBOX_LatvanyossagLeiras_TextChanged);
             // 
             // LB_Latvanyossagok
             // 
             this.LB_Latvanyossagok.FormattingEnabled = true;
+            this.LB_Latvanyossagok.HorizontalScrollbar = true;
             this.LB_Latvanyossagok.IntegralHeight = false;
             this.LB_Latvanyossagok.ItemHeight = 21;
             this.LB_Latvanyossagok.Location = new System.Drawing.Point(6, 28);
@@ -248,10 +244,16 @@ namespace LatvanyossagokApplication
             // NUPDOWN_LatvanyossagAr
             // 
             this.NUPDOWN_LatvanyossagAr.Location = new System.Drawing.Point(286, 165);
+            this.NUPDOWN_LatvanyossagAr.Maximum = new decimal(new int[] {
+            1215752191,
+            23,
+            0,
+            0});
             this.NUPDOWN_LatvanyossagAr.Name = "NUPDOWN_LatvanyossagAr";
             this.NUPDOWN_LatvanyossagAr.Size = new System.Drawing.Size(118, 26);
             this.NUPDOWN_LatvanyossagAr.TabIndex = 1;
             this.NUPDOWN_LatvanyossagAr.TabStop = false;
+            this.NUPDOWN_LatvanyossagAr.ValueChanged += new System.EventHandler(this.NUPDOWN_LatvanyossagAr_ValueChanged);
             // 
             // TXTBOX_LatvanyossagNev
             // 
@@ -261,23 +263,13 @@ namespace LatvanyossagokApplication
             this.TXTBOX_LatvanyossagNev.Size = new System.Drawing.Size(150, 26);
             this.TXTBOX_LatvanyossagNev.TabIndex = 0;
             this.TXTBOX_LatvanyossagNev.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(255, 317);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(149, 37);
-            this.button1.TabIndex = 9;
-            this.button1.TabStop = false;
-            this.button1.Text = "Új látványosság";
-            this.button1.UseVisualStyleBackColor = true;
+            this.TXTBOX_LatvanyossagNev.TextChanged += new System.EventHandler(this.TXTBOX_LatvanyossagNev_TextChanged);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1037, 461);
+            this.ClientSize = new System.Drawing.Size(881, 461);
             this.Controls.Add(this.GB_Latvanyossag);
             this.Controls.Add(this.GB_Varos);
             this.Font = new System.Drawing.Font("Montserrat", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -288,7 +280,6 @@ namespace LatvanyossagokApplication
             this.GB_Varos.PerformLayout();
             this.GB_Latvanyossag.ResumeLayout(false);
             this.GB_Latvanyossag.PerformLayout();
-            this.GB_LatvanyossagLeiras.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NUPDOWN_LatvanyossagAr)).EndInit();
             this.ResumeLayout(false);
 
@@ -311,10 +302,8 @@ namespace LatvanyossagokApplication
         private System.Windows.Forms.ListBox LB_Latvanyossagok;
         private System.Windows.Forms.NumericUpDown NUPDOWN_LatvanyossagAr;
         private System.Windows.Forms.TextBox TXTBOX_LatvanyossagNev;
-        private System.Windows.Forms.GroupBox GB_LatvanyossagLeiras;
-        private System.Windows.Forms.Label LBL_LatvanyossagLeiras;
         private System.Windows.Forms.Button BTN_ÚjVárosLétrehozása;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BTN_UjLatvanyossagLetrehozasa;
     }
 }
 
