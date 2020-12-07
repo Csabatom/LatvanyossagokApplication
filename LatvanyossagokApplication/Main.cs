@@ -20,6 +20,8 @@ namespace LatvanyossagokApplication
         public Main()
         {
             InitializeComponent();
+            BTN_ÚjVárosLétrehozása.Visible = false;
+            BTN_VarosHozzaadas.Enabled = false;
 
             conn = new MySqlConnection("Server=localhost; Database=latvanyossagokdb; Uid=root; Pwd=;");
             try
@@ -80,15 +82,31 @@ namespace LatvanyossagokApplication
 
         private void BTN_VarosHozzaadas_Click(object sender, EventArgs e)
         {
-            if (TXTBOX_VarosNev.Text != "") {
+            if(BTN_VarosHozzaadas.Text == "✔")
+            {
                 try
                 {
                     reader = SQLparancs("INSERT INTO varosok (nev, lakossag) VALUES('" + TXTBOX_VarosNev.Text + "', " + NUPDOWN_VarosLakossag.Value + ")");
                     reader.Close();
                     VarosListaFrissites();
-                } catch
+                    VarosHozzaadasFormTorles();
+                }
+                catch
                 {
                     MessageBox.Show("Létezik már ilyen névvel város!");
+                }
+            } else
+            {
+                try
+                {
+                    reader = SQLparancs("UPDATE varosok SET nev='" + TXTBOX_VarosNev.Text + "', lakossag=" + NUPDOWN_VarosLakossag.Value + " WHERE ID LIKE '" + ((Varos)LB_Varosok.SelectedItem).Id + "'");
+                    reader.Close();
+                    VarosListaFrissites();
+                    VarosHozzaadasFormTorles();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
                 }
             }
         }
@@ -160,19 +178,98 @@ namespace LatvanyossagokApplication
 
         private void LB_Varosok_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TXTBOX_VarosNev.Text = ((Varos)LB_Varosok.SelectedItem).Nev;
-            NUPDOWN_VarosLakossag.Value = ((Varos)LB_Varosok.SelectedItem).Lakossag;
-            BTN_VarosHozzaadas.Text = "✏";
+            if(LB_Varosok.SelectedIndex != -1)
+            {
+                TXTBOX_VarosNev.Text = ((Varos)LB_Varosok.SelectedItem).Nev;
+                NUPDOWN_VarosLakossag.Value = ((Varos)LB_Varosok.SelectedItem).Lakossag;
+                BTN_VarosHozzaadas.Text = "✏";
+                BTN_VarosHozzaadas.Enabled = false;
+                BTN_ÚjVárosLétrehozása.Visible = true;
+            } else
+            {
+                BTN_ÚjVárosLétrehozása.Visible = false;
+            }
 
             LatvanyossagListaFrissites();
         }
 
         private void LB_Latvanyossagok_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TXTBOX_LatvanyossagNev.Text = ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Nev;
-            TXTBOX_LatvanyossagLeiras.Text = ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Leiras;
-            NUPDOWN_LatvanyossagAr.Value = ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Ar;
-            BTN_LatvanyossagHozzaadas.Text = "✏";
+            if(LB_Latvanyossagok.SelectedIndex != -1)
+            {
+                TXTBOX_LatvanyossagNev.Text = ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Nev;
+                TXTBOX_LatvanyossagLeiras.Text = ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Leiras;
+                NUPDOWN_LatvanyossagAr.Value = ((Latvanyossag)LB_Latvanyossagok.SelectedItem).Ar;
+                BTN_LatvanyossagHozzaadas.Text = "✏";
+            }
+        }
+
+        private void TXTBOX_VarosNev_TextChanged(object sender, EventArgs e)
+        {
+            if(TXTBOX_VarosNev.Text != "")
+            {
+                if (BTN_VarosHozzaadas.Text == "✔")
+                {
+                    BTN_VarosHozzaadas.Enabled = true;
+                }
+                else
+                {
+                    if (TXTBOX_VarosNev.Text != ((Varos)LB_Varosok.SelectedItem).Nev || NUPDOWN_VarosLakossag.Value != ((Varos)LB_Varosok.SelectedItem).Lakossag)
+                    {
+                        BTN_VarosHozzaadas.Enabled = true;
+                    }
+                    else
+                    {
+                        BTN_VarosHozzaadas.Enabled = false;
+                    }
+                }
+            } else
+            {
+                BTN_VarosHozzaadas.Enabled = false;
+            }
+        }
+
+        private void BTN_ÚjVárosLétrehozása_Click(object sender, EventArgs e)
+        {
+            TXTBOX_VarosNev.Text = "";
+            NUPDOWN_VarosLakossag.Value = 0;
+            BTN_VarosHozzaadas.Text = "✔";
+            BTN_ÚjVárosLétrehozása.Visible = false;
+            LB_Varosok.SelectedIndex = -1;
+        }
+
+        private void VarosHozzaadasFormTorles()
+        {
+            TXTBOX_VarosNev.Text = "";
+            NUPDOWN_VarosLakossag.Value = 0;
+            BTN_VarosHozzaadas.Text = "✔";
+            BTN_ÚjVárosLétrehozása.Visible = false;
+        }
+
+        private void NUPDOWN_VarosLakossag_ValueChanged(object sender, EventArgs e)
+        {
+            if (TXTBOX_VarosNev.Text != "")
+            {
+                if (BTN_VarosHozzaadas.Text == "✔")
+                {
+                    BTN_VarosHozzaadas.Enabled = true;
+                }
+                else
+                {
+                    if (TXTBOX_VarosNev.Text != ((Varos)LB_Varosok.SelectedItem).Nev || NUPDOWN_VarosLakossag.Value != ((Varos)LB_Varosok.SelectedItem).Lakossag)
+                    {
+                        BTN_VarosHozzaadas.Enabled = true;
+                    }
+                    else
+                    {
+                        BTN_VarosHozzaadas.Enabled = false;
+                    }
+                }
+            }
+            else
+            {
+                BTN_VarosHozzaadas.Enabled = false;
+            }
         }
     }
 }
