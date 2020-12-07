@@ -33,7 +33,7 @@ namespace LatvanyossagokApplication
             this.NUPDOWN_VarosLakossag = new System.Windows.Forms.NumericUpDown();
             this.BTN_VarosHozzaadas = new System.Windows.Forms.Button();
             this.GB_Varos = new System.Windows.Forms.GroupBox();
-            this.BTN_ÚjVárosLétrehozása = new System.Windows.Forms.Button();
+            this.BTN_UjVarosLetrehozasa = new System.Windows.Forms.Button();
             this.LBL_VarosLakossag = new System.Windows.Forms.Label();
             this.BTN_VarosTorles = new System.Windows.Forms.Button();
             this.LB_Varosok = new System.Windows.Forms.ListBox();
@@ -92,7 +92,7 @@ namespace LatvanyossagokApplication
             // 
             // GB_Varos
             // 
-            this.GB_Varos.Controls.Add(this.BTN_ÚjVárosLétrehozása);
+            this.GB_Varos.Controls.Add(this.BTN_UjVarosLetrehozasa);
             this.GB_Varos.Controls.Add(this.LBL_VarosLakossag);
             this.GB_Varos.Controls.Add(this.BTN_VarosTorles);
             this.GB_Varos.Controls.Add(this.LB_Varosok);
@@ -108,17 +108,17 @@ namespace LatvanyossagokApplication
             this.GB_Varos.TabStop = false;
             this.GB_Varos.Text = "Város";
             // 
-            // BTN_ÚjVárosLétrehozása
+            // BTN_UjVarosLetrehozasa
             // 
-            this.BTN_ÚjVárosLétrehozása.Location = new System.Drawing.Point(205, 231);
-            this.BTN_ÚjVárosLétrehozása.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.BTN_ÚjVárosLétrehozása.Name = "BTN_ÚjVárosLétrehozása";
-            this.BTN_ÚjVárosLétrehozása.Size = new System.Drawing.Size(191, 37);
-            this.BTN_ÚjVárosLétrehozása.TabIndex = 8;
-            this.BTN_ÚjVárosLétrehozása.TabStop = false;
-            this.BTN_ÚjVárosLétrehozása.Text = "Új város";
-            this.BTN_ÚjVárosLétrehozása.UseVisualStyleBackColor = true;
-            this.BTN_ÚjVárosLétrehozása.Click += new System.EventHandler(this.BTN_ÚjVárosLétrehozása_Click);
+            this.BTN_UjVarosLetrehozasa.Location = new System.Drawing.Point(205, 231);
+            this.BTN_UjVarosLetrehozasa.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.BTN_UjVarosLetrehozasa.Name = "BTN_UjVarosLetrehozasa";
+            this.BTN_UjVarosLetrehozasa.Size = new System.Drawing.Size(191, 37);
+            this.BTN_UjVarosLetrehozasa.TabIndex = 8;
+            this.BTN_UjVarosLetrehozasa.TabStop = false;
+            this.BTN_UjVarosLetrehozasa.Text = "Új város";
+            this.BTN_UjVarosLetrehozasa.UseVisualStyleBackColor = true;
+            this.BTN_UjVarosLetrehozasa.Click += new System.EventHandler(this.BTN_UjVarosLetrehozasa_Click);
             // 
             // LBL_VarosLakossag
             // 
@@ -302,7 +302,7 @@ namespace LatvanyossagokApplication
         private System.Windows.Forms.ListBox LB_Latvanyossagok;
         private System.Windows.Forms.NumericUpDown NUPDOWN_LatvanyossagAr;
         private System.Windows.Forms.TextBox TXTBOX_LatvanyossagNev;
-        private System.Windows.Forms.Button BTN_ÚjVárosLétrehozása;
+        private System.Windows.Forms.Button BTN_UjVarosLetrehozasa;
         private System.Windows.Forms.Button BTN_UjLatvanyossagLetrehozasa;
     }
 }
