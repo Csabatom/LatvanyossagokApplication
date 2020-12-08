@@ -62,26 +62,6 @@ namespace LatvanyossagokApplication
             MySqlDataReader reader;
             reader = comm.ExecuteReader();
             return reader;
-            /*using (var reader = comm.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    int id = reader.GetInt32("id");
-                    string nev = reader.GetString("nev");
-
-                    string uzlet;
-                    try
-                    {
-                        uzlet = reader.GetString("uzlet");
-                    }
-                    catch (SqlNullValueException ex)
-                    {
-                        uzlet = null;
-                    }
-                    //var ajandek = new Ajandek(id, nev, uzlet);
-                    //ajandekListBox.Items.Add(ajandek);
-                }
-            }*/
         }
 
         private void BTN_VarosHozzaadas_Click(object sender, EventArgs e)
