@@ -36,9 +36,8 @@ namespace LatvanyossagokApplication
                 reader = SQLparancs("CREATE TABLE IF NOT EXISTS latvanyossagok (id int(11) NOT NULL AUTO_INCREMENT, varos_id int(11), nev text COLLATE utf8mb4_hungarian_ci NOT NULL, leiras text COLLATE utf8mb4_hungarian_ci NOT NULL, ar int(11) DEFAULT NULL, PRIMARY KEY(id), FOREIGN KEY(varos_id) REFERENCES varosok(id))");
                 reader.Close();
                 VarosListaFrissites();
-            } catch (Exception ex)
+            } catch
             {
-                MessageBox.Show(ex+"");
                 DialogResult dialogresult = MessageBox.Show("Sikertelen kapcsolódás az adatbázishoz");
                 if (dialogresult == DialogResult.OK)
                 {
